@@ -93,6 +93,16 @@ namespace QLSanBong.BUS
             user.Pass = password;
             _context.Entry(user).State = EntityState.Modified;
             _context.SaveChanges();
-        }                             
+        }
+        // Thay đổi thông tin tài khoản
+        public void ChangeInfoByName(string name, string email, string phone)
+        {
+            User user = _context.Users.Where(x => x.Email.Equals(email)).ToList()[0];
+            user.Username = name;
+            user.Email = email;
+            user.Phone = phone;
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

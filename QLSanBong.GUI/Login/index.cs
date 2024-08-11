@@ -81,7 +81,7 @@ namespace QLSanBong.GUI.Login
                         MessageBox.Show("Đăng nhập thành công!", "Thông Báo");
                         frm_Admin frmAdmin = new frm_Admin();
                         frmAdmin.Show();
-                        this.Close();
+                        this.Hide();
                     }
                 }
                 // Là User
@@ -103,7 +103,7 @@ namespace QLSanBong.GUI.Login
                         };
                         _sessionBus.Add(session);
                         MessageBox.Show("Đăng nhập thành công!", "Thông Báo");
-                        frm_User frmUser = new frm_User(this);
+                        frm_User frmUser = new frm_User(this, _sessionBus);
                         frmUser.Show();
                         this.Hide();
                     }

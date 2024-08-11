@@ -73,14 +73,14 @@
             // smi_info
             // 
             smi_info.Name = "smi_info";
-            smi_info.Size = new Size(224, 26);
+            smi_info.Size = new Size(218, 26);
             smi_info.Text = "Thông Tin Cá Nhân";
             smi_info.Click += smi_info_Click;
             // 
             // tsmi_Exit
             // 
             tsmi_Exit.Name = "tsmi_Exit";
-            tsmi_Exit.Size = new Size(224, 26);
+            tsmi_Exit.Size = new Size(218, 26);
             tsmi_Exit.Text = "Thoát";
             tsmi_Exit.Click += tsmi_Exit_Click;
             // 
@@ -170,6 +170,7 @@
             MainMenuStrip = menuStrip1;
             Name = "frm_User";
             Text = "Màn Hình Chính";
+            FormClosing += frm_User_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             menuStrip2.ResumeLayout(false);

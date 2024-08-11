@@ -1,4 +1,5 @@
-﻿using QLSanBong.GUI.Login;
+﻿using QLSanBong.BUS;
+using QLSanBong.GUI.Login;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,16 +14,18 @@ namespace QLSanBong.GUI.Users
 {
     public partial class frm_User : Form
     {
-        private readonly frm_Login frm_Login;
+        private frm_Login frm_Login;
+        private readonly SessionBus _sessionBus;
         private Form activeForm = null;
         public frm_User()
         {
             InitializeComponent();
         }
-        public frm_User(frm_Login frm)
+        public frm_User(frm_Login frm, SessionBus se)
         {
             InitializeComponent();
             this.frm_Login = frm;
+            this._sessionBus = se;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -84,7 +87,18 @@ namespace QLSanBong.GUI.Users
 
         private void smi_info_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frm_Account());
+            OpenChildForm(new frm_Account(_sessionBus, this, this.frm_Login));
+        }
+
+        private void frm_User_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+
+                frm_Login.Show();
+                this.Close();
+            }
         }
     }
 }
