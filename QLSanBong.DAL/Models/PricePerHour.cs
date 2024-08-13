@@ -13,7 +13,5 @@ public partial class PricePerHour
 
     public double Price { get; set; }
 
-    public string Type { get; set; } = null!;
-
     public virtual ICollection<OrderPitch> OrderPitches { get; set; } = new List<OrderPitch>();
 }

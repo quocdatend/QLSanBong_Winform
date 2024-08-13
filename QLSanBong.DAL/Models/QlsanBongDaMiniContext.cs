@@ -205,9 +205,6 @@ public partial class QlsanBongDaMiniContext : DbContext
             entity.Property(e => e.Price).HasColumnName("PRICE");
             entity.Property(e => e.TimeEnd).HasColumnName("TIME_END");
             entity.Property(e => e.TimeStart).HasColumnName("TIME_START");
-            entity.Property(e => e.Type)
-                .HasMaxLength(10)
-                .HasColumnName("TYPE");
         });
 
         modelBuilder.Entity<Role>(entity =>
