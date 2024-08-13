@@ -9,5 +9,7 @@ public partial class TypePitch
 
     public string Name { get; set; } = null!;
 
+    public double Price { get; set; }
+
     public virtual ICollection<Pitch> Pitches { get; set; } = new List<Pitch>();
 }

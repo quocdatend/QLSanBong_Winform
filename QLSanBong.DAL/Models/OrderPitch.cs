@@ -11,13 +11,13 @@ public partial class OrderPitch
 
     public int UserId { get; set; }
 
-    public TimeOnly TimeStart { get; set; }
+    public DateTime TimeStart { get; set; }
 
-    public TimeOnly TimeEnd { get; set; }
+    public DateTime TimeEnd { get; set; }
 
     public double Price { get; set; }
 
-    public bool IsCheck { get; set; }
+    public bool? IsCheck { get; set; }
 
     public int PricePerHourId { get; set; }
 

@@ -9,6 +9,8 @@ public partial class PricePerHour
 
     public TimeOnly TimeStart { get; set; }
 
+    public TimeOnly TimeEnd { get; set; }
+
     public double Price { get; set; }
 
     public string Type { get; set; } = null!;

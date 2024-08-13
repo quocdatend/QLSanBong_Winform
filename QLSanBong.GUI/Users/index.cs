@@ -26,6 +26,7 @@ namespace QLSanBong.GUI.Users
             InitializeComponent();
             this.frm_Login = frm;
             this._sessionBus = se;
+            OpenChildForm(new frm_Pitch(_sessionBus));
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -38,9 +39,9 @@ namespace QLSanBong.GUI.Users
             DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-
-                frm_Login.Show();
                 this.Close();
+                frm_Login.Show();
+                
             }
         }
 
@@ -67,7 +68,7 @@ namespace QLSanBong.GUI.Users
 
         private void smi_Pitch_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frm_Pitch());
+            OpenChildForm(new frm_Pitch(_sessionBus));
         }
 
         private void smi_orderPitch_Click(object sender, EventArgs e)
@@ -95,9 +96,9 @@ namespace QLSanBong.GUI.Users
             DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-
-                frm_Login.Show();
                 this.Close();
+                frm_Login.Show();
+                
             }
         }
     }

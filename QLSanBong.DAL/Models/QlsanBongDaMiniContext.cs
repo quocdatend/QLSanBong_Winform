@@ -123,13 +123,19 @@ public partial class QlsanBongDaMiniContext : DbContext
             entity.ToTable("ORDER_PITCH");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.IsCheck).HasColumnName("IS_CHECK");
+            entity.Property(e => e.IsCheck)
+                .HasDefaultValue(false)
+                .HasColumnName("IS_CHECK");
             entity.Property(e => e.IsPay).HasColumnName("IS_PAY");
             entity.Property(e => e.PitchId).HasColumnName("PITCH_ID");
             entity.Property(e => e.Price).HasColumnName("PRICE");
             entity.Property(e => e.PricePerHourId).HasColumnName("PRICE_PER_HOUR_ID");
-            entity.Property(e => e.TimeEnd).HasColumnName("TIME_END");
-            entity.Property(e => e.TimeStart).HasColumnName("TIME_START");
+            entity.Property(e => e.TimeEnd)
+                .HasColumnType("datetime")
+                .HasColumnName("TIME_END");
+            entity.Property(e => e.TimeStart)
+                .HasColumnType("datetime")
+                .HasColumnName("TIME_START");
             entity.Property(e => e.UserId).HasColumnName("USER_ID");
 
             entity.HasOne(d => d.Pitch).WithMany(p => p.OrderPitches)
@@ -197,6 +203,7 @@ public partial class QlsanBongDaMiniContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Price).HasColumnName("PRICE");
+            entity.Property(e => e.TimeEnd).HasColumnName("TIME_END");
             entity.Property(e => e.TimeStart).HasColumnName("TIME_START");
             entity.Property(e => e.Type)
                 .HasMaxLength(10)
@@ -223,6 +230,7 @@ public partial class QlsanBongDaMiniContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(10)
                 .HasColumnName("NAME");
+            entity.Property(e => e.Price).HasColumnName("PRICE");
         });
 
         modelBuilder.Entity<User>(entity =>
