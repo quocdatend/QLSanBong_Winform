@@ -18,6 +18,11 @@ namespace QLSanBong.BUS
             return _context.PricePerHours.ToList();
         }
 
-        // get 
+        // get  by Id
+        public List<PricePerHour> GetById(int id)
+        {
+            List<PricePerHour> list = _context.PricePerHours.Where(x => x.Id == id).ToList();
+            return list;
+        }
     }
 }

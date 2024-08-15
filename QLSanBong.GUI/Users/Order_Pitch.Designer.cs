@@ -28,32 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            dgvOrderPitch = new DataGridView();
+            btnDelete = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvOrderPitch).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // dgvOrderPitch
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(447, 201);
-            label1.Name = "label1";
-            label1.Size = new Size(161, 20);
-            label1.TabIndex = 0;
-            label1.Text = "this is page order pitch";
+            dgvOrderPitch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrderPitch.Location = new Point(12, 12);
+            dgvOrderPitch.Name = "dgvOrderPitch";
+            dgvOrderPitch.RowHeadersWidth = 51;
+            dgvOrderPitch.Size = new Size(743, 426);
+            dgvOrderPitch.TabIndex = 0;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(842, 205);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(118, 37);
+            btnDelete.TabIndex = 1;
+            btnDelete.Text = "Xóa";
+            btnDelete.UseVisualStyleBackColor = true;
             // 
             // frm_OrderPitch
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1043, 450);
-            Controls.Add(label1);
+            Controls.Add(btnDelete);
+            Controls.Add(dgvOrderPitch);
             Name = "frm_OrderPitch";
             Text = "Order Pitch";
+            ((System.ComponentModel.ISupportInitialize)dgvOrderPitch).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private DataGridView dgvOrderPitch;
+        private Button btnDelete;
     }
 }

@@ -103,7 +103,7 @@ namespace QLSanBong.GUI.Users
                 }
                 //List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(startTime, time2);
                 
-                dgvPitch.Rows.Add(time1.ToString("HH:mm"), time2.ToString("HH:mm"), countSan5 , countSan7);
+                dgvPitch.Rows.Add(time1.ToString("HH:mm"), time2.ToString("HH:mm"), countSan5 , countSan7); /// bug hered
 
                 startTime = startTime.AddHours(1);
             }
@@ -152,7 +152,7 @@ namespace QLSanBong.GUI.Users
                             TimeEnd = endTime,
                             Price = getSan.FirstOrDefault().Price,
                             PricePerHourId = pricePitch.Id,
-                            PitchId = getPitch[orderPitches.Count()].Id,
+                            PitchId = getPitch[orderPitches.Count()].Id, /// bug here
                         };
                         _orderPitchBus.Add(newOrderPitch);
                     }

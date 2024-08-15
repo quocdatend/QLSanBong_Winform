@@ -73,7 +73,7 @@ namespace QLSanBong.GUI.Users
 
         private void smi_orderPitch_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frm_OrderPitch());
+            OpenChildForm(new frm_OrderPitch(_sessionBus));
         }
 
         private void smi_orderDrinks_Click(object sender, EventArgs e)

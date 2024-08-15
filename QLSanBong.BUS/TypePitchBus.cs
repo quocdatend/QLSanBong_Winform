@@ -29,5 +29,12 @@ namespace QLSanBong.BUS
             List<TypePitch> list = _context.TypePitches.Where(x => x.Name.Equals(name)).ToList();
             return list;
         }
+
+        // get by id
+        public List<TypePitch> GetById(int id)
+        {
+            List<TypePitch> list = _context.TypePitches.Where(x => x.Id == id).ToList();
+            return list;
+        }
     }
 }
