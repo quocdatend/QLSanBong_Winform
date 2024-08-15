@@ -77,8 +77,8 @@ namespace QLSanBong.GUI.Users
             List<TypePitch> getSan7 = _typePitchBus.GetByName("Sân 7");
             List<Pitch> getByIdSan5 = _pitchBus.GetByPitchId(getSan5.FirstOrDefault().Id);
             List<Pitch> getByIdSan7 = _pitchBus.GetByPitchId(getSan7.FirstOrDefault().Id);
-            string countSan5 = getByIdSan5.Count() == 0 ? "Hết" : getByIdSan5.Count().ToString();
-            string countSan7 = getByIdSan7.Count() == 0 ? "Hết" : getByIdSan7.Count().ToString();
+            string countSan5 = getByIdSan5.Count() == 0 ? "Hết" : (getSan5.Count()).ToString();
+            string countSan7 = getByIdSan7.Count() == 0 ? "Hết" : (getSan7.Count()).ToString();
 
             if (comboBoxDate.SelectedItem == null) return;
 
@@ -101,8 +101,9 @@ namespace QLSanBong.GUI.Users
                 {
                     time2 = endOfDay;
                 }
-
-                dgvPitch.Rows.Add(time1.ToString("HH:mm"), time2.ToString("HH:mm"), countSan5, countSan7);
+                //List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(startTime, time2);
+                
+                dgvPitch.Rows.Add(time1.ToString("HH:mm"), time2.ToString("HH:mm"), countSan5 , countSan7);
 
                 startTime = startTime.AddHours(1);
             }
@@ -121,8 +122,9 @@ namespace QLSanBong.GUI.Users
                     {
                         typePitch = "Sân 5";
                     }
-                    DateTime startTime = (DateTime)this.dgvPitch.Rows[rowclick].Cells[columnName: "Column1"].Value;
-                    DateTime endTime = (DateTime)this.dgvPitch.Rows[rowclick].Cells[columnName: "Column2"].Value;
+                    DateTime getCbtime = DateTime.ParseExact(comboBoxDate.Text, "dd/MM/yyyy", null);
+                    DateTime startTime = getCbtime.Date.Add(DateTime.ParseExact((string)dgvPitch.Rows[rowclick].Cells[columnName: "Column1"].Value, "HH:mm", null).TimeOfDay);
+                    DateTime endTime = getCbtime.Date.Add(DateTime.ParseExact((string)dgvPitch.Rows[rowclick].Cells[columnName: "Column2"].Value, "HH:mm", null).TimeOfDay);
                     List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(startTime, endTime);
                     List<TypePitch> getSan = _typePitchBus.GetByName(typePitch);
                     List<Pitch> getPitch = _pitchBus.GetByPitchId(getSan.FirstOrDefault().Id);
@@ -136,6 +138,7 @@ namespace QLSanBong.GUI.Users
                         {
                             if ((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay))
                             {
+                                MessageBox.Show(((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay)).ToString());
                                 pricePitch = item;
                             }
                         }
