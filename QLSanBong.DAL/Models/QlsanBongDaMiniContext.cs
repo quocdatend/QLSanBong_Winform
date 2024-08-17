@@ -21,6 +21,8 @@ public partial class QlsanBongDaMiniContext : DbContext
 
     public virtual DbSet<FoodDrink> FoodDrinks { get; set; }
 
+    public virtual DbSet<OrderFoodDrink> OrderFoodDrinks { get; set; }
+
     public virtual DbSet<OrderFoodDrinkDetail> OrderFoodDrinkDetails { get; set; }
 
     public virtual DbSet<OrderPitch> OrderPitches { get; set; }
@@ -97,25 +99,45 @@ public partial class QlsanBongDaMiniContext : DbContext
                 .HasColumnName("URL_IMG");
         });
 
+        modelBuilder.Entity<OrderFoodDrink>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_ORDER_FOOD_DRINK_DETAIL");
+
+            entity.ToTable("ORDER_FOOD_DRINK");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Time)
+                .HasColumnType("datetime")
+                .HasColumnName("TIME");
+            entity.Property(e => e.UserId).HasColumnName("USER_ID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.OrderFoodDrinks)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ORDER_FOOD_DRINK_DETAIL_USERS");
+        });
+
         modelBuilder.Entity<OrderFoodDrinkDetail>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK_ORDER_FOOD_DRINK_DETAIL_1");
+
             entity.ToTable("ORDER_FOOD_DRINK_DETAIL");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Count).HasColumnName("COUNT");
             entity.Property(e => e.FoodDrinkId).HasColumnName("FOOD_DRINK_ID");
-            entity.Property(e => e.TotalPrice).HasColumnName("TOTAL_PRICE");
-            entity.Property(e => e.UserId).HasColumnName("USER_ID");
+            entity.Property(e => e.OrderFoodDrinkId).HasColumnName("ORDER_FOOD_DRINK_ID");
+            entity.Property(e => e.Price).HasColumnName("PRICE");
 
             entity.HasOne(d => d.FoodDrink).WithMany(p => p.OrderFoodDrinkDetails)
                 .HasForeignKey(d => d.FoodDrinkId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ORDER_FOOD_DRINK_DETAIL_FOOD_DRINK");
+                .HasConstraintName("FK_ORDER_FOOD_DRINK_DETAIL_FOOD_DRINK1");
 
-            entity.HasOne(d => d.User).WithMany(p => p.OrderFoodDrinkDetails)
-                .HasForeignKey(d => d.UserId)
+            entity.HasOne(d => d.OrderFoodDrink).WithMany(p => p.OrderFoodDrinkDetails)
+                .HasForeignKey(d => d.OrderFoodDrinkId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ORDER_FOOD_DRINK_DETAIL_USERS");
+                .HasConstraintName("FK_ORDER_FOOD_DRINK_DETAIL_ORDER_FOOD_DRINK");
         });
 
         modelBuilder.Entity<OrderPitch>(entity =>
@@ -159,7 +181,7 @@ public partial class QlsanBongDaMiniContext : DbContext
             entity.ToTable("PAYMENT_HISTORY");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.OrderFoodDrinkDetailId).HasColumnName("ORDER_FOOD_DRINK_DETAIL_ID");
+            entity.Property(e => e.OrderFoodDrinkId).HasColumnName("ORDER_FOOD_DRINK_ID");
             entity.Property(e => e.OrderPitchId).HasColumnName("ORDER_PITCH_ID");
             entity.Property(e => e.Price).HasColumnName("PRICE");
             entity.Property(e => e.Time)
@@ -167,9 +189,9 @@ public partial class QlsanBongDaMiniContext : DbContext
                 .HasColumnName("TIME");
             entity.Property(e => e.UserId).HasColumnName("USER_ID");
 
-            entity.HasOne(d => d.OrderFoodDrinkDetail).WithMany(p => p.PaymentHistories)
-                .HasForeignKey(d => d.OrderFoodDrinkDetailId)
-                .HasConstraintName("FK_PAYMENT_HISTORY_ORDER_FOOD_DRINK_DETAIL");
+            entity.HasOne(d => d.OrderFoodDrink).WithMany(p => p.PaymentHistories)
+                .HasForeignKey(d => d.OrderFoodDrinkId)
+                .HasConstraintName("FK_PAYMENT_HISTORY_ORDER_FOOD_DRINK");
 
             entity.HasOne(d => d.OrderPitch).WithMany(p => p.PaymentHistories)
                 .HasForeignKey(d => d.OrderPitchId)

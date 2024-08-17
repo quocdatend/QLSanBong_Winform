@@ -15,7 +15,7 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
-    public virtual ICollection<OrderFoodDrinkDetail> OrderFoodDrinkDetails { get; set; } = new List<OrderFoodDrinkDetail>();
+    public virtual ICollection<OrderFoodDrink> OrderFoodDrinks { get; set; } = new List<OrderFoodDrink>();
 
     public virtual ICollection<OrderPitch> OrderPitches { get; set; } = new List<OrderPitch>();
 

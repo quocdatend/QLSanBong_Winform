@@ -28,32 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            dgvShowTimeOrder = new DataGridView();
+            dgvShowOrderDetail = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvShowTimeOrder).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvShowOrderDetail).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // dgvShowTimeOrder
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(423, 194);
-            label1.Name = "label1";
-            label1.Size = new Size(167, 20);
-            label1.TabIndex = 0;
-            label1.Text = "this is page order drinks";
+            dgvShowTimeOrder.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvShowTimeOrder.Location = new Point(12, 12);
+            dgvShowTimeOrder.Name = "dgvShowTimeOrder";
+            dgvShowTimeOrder.RowHeadersWidth = 51;
+            dgvShowTimeOrder.Size = new Size(351, 426);
+            dgvShowTimeOrder.TabIndex = 0;
+            dgvShowTimeOrder.RowHeaderMouseClick += dgvShowTimeOrder_RowHeaderMouseClick;
+            // 
+            // dgvShowOrderDetail
+            // 
+            dgvShowOrderDetail.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvShowOrderDetail.Location = new Point(369, 12);
+            dgvShowOrderDetail.Name = "dgvShowOrderDetail";
+            dgvShowOrderDetail.RowHeadersWidth = 51;
+            dgvShowOrderDetail.Size = new Size(662, 426);
+            dgvShowOrderDetail.TabIndex = 1;
             // 
             // frm_OrderDrinks
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1043, 450);
-            Controls.Add(label1);
+            Controls.Add(dgvShowOrderDetail);
+            Controls.Add(dgvShowTimeOrder);
             Name = "frm_OrderDrinks";
             Text = "Order Drinks";
+            ((System.ComponentModel.ISupportInitialize)dgvShowTimeOrder).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvShowOrderDetail).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private DataGridView dgvShowTimeOrder;
+        private DataGridView dgvShowOrderDetail;
     }
 }

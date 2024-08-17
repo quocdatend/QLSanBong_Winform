@@ -78,7 +78,7 @@ namespace QLSanBong.GUI.Users
 
         private void smi_orderDrinks_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new frm_OrderDrinks());
+            OpenChildForm(new frm_OrderDrinks(_sessionBus));
         }
 
         private void smi_Payment_Click(object sender, EventArgs e)

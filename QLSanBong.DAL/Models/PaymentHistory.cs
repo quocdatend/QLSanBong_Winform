@@ -15,9 +15,9 @@ public partial class PaymentHistory
 
     public int? OrderPitchId { get; set; }
 
-    public int? OrderFoodDrinkDetailId { get; set; }
+    public int? OrderFoodDrinkId { get; set; }
 
-    public virtual OrderFoodDrinkDetail? OrderFoodDrinkDetail { get; set; }
+    public virtual OrderFoodDrink? OrderFoodDrink { get; set; }
 
     public virtual OrderPitch? OrderPitch { get; set; }
 
