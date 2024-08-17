@@ -40,7 +40,7 @@
             PaymentToolStripMenuItem = new ToolStripMenuItem();
             menuStrip2 = new MenuStrip();
             thôngTinTàiKhoảnToolStripMenuItem = new ToolStripMenuItem();
-            AccontToolStripMenuItem = new ToolStripMenuItem();
+            AccountToolStripMenuItem = new ToolStripMenuItem();
             ExitToolStripMenuItem = new ToolStripMenuItem();
             panel_show = new Panel();
             menuStrip1.SuspendLayout();
@@ -128,32 +128,32 @@
             menuStrip2.Dock = DockStyle.None;
             menuStrip2.ImageScalingSize = new Size(20, 20);
             menuStrip2.Items.AddRange(new ToolStripItem[] { thôngTinTàiKhoảnToolStripMenuItem });
-            menuStrip2.Location = new Point(1005, 9);
+            menuStrip2.Location = new Point(855, 9);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.RenderMode = ToolStripRenderMode.System;
             menuStrip2.RightToLeft = RightToLeft.Yes;
-            menuStrip2.Size = new Size(159, 28);
+            menuStrip2.Size = new Size(309, 28);
             menuStrip2.TabIndex = 1;
             menuStrip2.Text = "menuStrip2";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
-            thôngTinTàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { AccontToolStripMenuItem, ExitToolStripMenuItem });
+            thôngTinTàiKhoảnToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { AccountToolStripMenuItem, ExitToolStripMenuItem });
             thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
             thôngTinTàiKhoảnToolStripMenuItem.Size = new Size(151, 24);
             thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
             // 
-            // AccontToolStripMenuItem
+            // AccountToolStripMenuItem
             // 
-            AccontToolStripMenuItem.Name = "AccontToolStripMenuItem";
-            AccontToolStripMenuItem.Size = new Size(154, 26);
-            AccontToolStripMenuItem.Text = "Tài khoản";
-            AccontToolStripMenuItem.Click += AccontToolStripMenuItem_Click;
+            AccountToolStripMenuItem.Name = "AccountToolStripMenuItem";
+            AccountToolStripMenuItem.Size = new Size(224, 26);
+            AccountToolStripMenuItem.Text = "Tài khoản";
+            AccountToolStripMenuItem.Click += AccountToolStripMenuItem_Click;
             // 
             // ExitToolStripMenuItem
             // 
             ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            ExitToolStripMenuItem.Size = new Size(154, 26);
+            ExitToolStripMenuItem.Size = new Size(224, 26);
             ExitToolStripMenuItem.Text = "Thoát";
             ExitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
@@ -197,7 +197,7 @@
         private ToolStripMenuItem PaymentToolStripMenuItem;
         private MenuStrip menuStrip2;
         private ToolStripMenuItem thôngTinTàiKhoảnToolStripMenuItem;
-        private ToolStripMenuItem AccontToolStripMenuItem;
+        private ToolStripMenuItem AccountToolStripMenuItem;
         private ToolStripMenuItem ExitToolStripMenuItem;
         private Panel panel_show;
     }

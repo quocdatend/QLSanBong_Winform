@@ -82,14 +82,20 @@ namespace QLSanBong.GUI.Admins
 
         }
 
-        private void AccontToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Close();
+                frm_Login.Show();
 
+            }
+        }
+
+        private void AccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frm_AccountAdmin(_sessionBus, this, this.frm_Login));
         }
     }
 }

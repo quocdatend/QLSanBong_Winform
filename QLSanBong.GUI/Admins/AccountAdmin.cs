@@ -2,6 +2,7 @@
 using QLSanBong.DAL;
 using QLSanBong.DAL.Models;
 using QLSanBong.GUI.Login;
+using QLSanBong.GUI.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,37 +14,36 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QLSanBong.GUI.Users
+namespace QLSanBong.GUI.Admins
 {
-    public partial class frm_Account : Form
+    public partial class frm_AccountAdmin : Form
     {
         private readonly SessionBus _sessionBus;
         private readonly UserBus _userBus = new UserBus();
         private readonly AdminBus _adminBus = new AdminBus();
-        private frm_User frm_User = null;
+        private frm_Admin frm_Admin = null;
         private frm_Login frm_Login = null;
-        public frm_Account()
+        public frm_AccountAdmin()
         {
             InitializeComponent();
         }
 
-        public frm_Account(SessionBus se, frm_User frm, frm_Login frm_l)
+        public frm_AccountAdmin(SessionBus se, frm_Admin frm, frm_Login frm_l)
         {
             InitializeComponent();
             _sessionBus = se;
             fieldDatatoTxt();
-            this.frm_User = frm;
+            this.frm_Admin = frm;
             this.frm_Login = frm_l;
         }
 
         private void fieldDatatoTxt()
         {
             Session se = _sessionBus.GetSession();
-            User user = _userBus.GetByUsername(se.Name).FirstOrDefault();
-            txtUsername.Text = user.Username;
-            txtPassword.Text = user.Pass;
-            txtEmail.Text = user.Email;
-            txtPhone.Text = user.Phone;
+            Admin admin = _adminBus.GetByName(se.Name).FirstOrDefault();
+            txtName.Text = admin.Name;
+            txtPass.Text = admin.Pass;
+            txtEmail.Text = admin.Email;
         }
 
         // Validation email
@@ -84,21 +84,16 @@ namespace QLSanBong.GUI.Users
             if (result == DialogResult.Yes)
             {
                 // check null
-                if (txtUsername.Text.Length == 0 || txtPhone.Text.Length == 0 || txtEmail.Text.Length == 0)
+                if (txtName.Text.Length == 0 || txtEmail.Text.Length == 0)
                 {
                     MessageBox.Show("Không được để trống!", "Thông báo");
                 }
                 else
                 {
                     // Kiểm tra độ dài có nhỏ hơn 6 kí tự hay không
-                    if (txtUsername.Text.Length < 6)
+                    if (txtName.Text.Length < 6)
                     {
                         MessageBox.Show("Độ dài tối thiểu 6 kí tự", "Thông Báo");
-                    }
-                    // Kiểm tra độ dài phải là 11 kí tự và phải là chuỗi số
-                    else if (!IsValidPhoneNumber(txtPhone.Text))
-                    {
-                        MessageBox.Show("Độ dài tối thiểu 10 hay 11 kí tự và phải là chuỗi số", "Thông Báo");
                     }
                     // dùng Validation kiểm tra tính hợp lệ của Email
                     else if (!IsValidEmail(txtEmail.Text))
@@ -108,33 +103,35 @@ namespace QLSanBong.GUI.Users
                     else
                     {
                         Session se = _sessionBus.GetSession();
-                        User user = _userBus.GetByUsername(se.Name).FirstOrDefault();
-                        if (txtUsername.Text != user.Username || txtPhone.Text != user.Phone || txtEmail.Text != user.Email)
-                        { 
-                            // Kiểm tra username đã có trong User hay Admin chưa
-                            if (txtUsername.Text != user.Username && (!_userBus.CheckByUsername(txtUsername.Text) || !_adminBus.CheckByUsername(txtUsername.Text)))
+                        Admin admin = _adminBus.GetByName(se.Name).FirstOrDefault();
+                        if (txtName.Text != admin.Name || txtEmail.Text != admin.Email)
+                        {
+                            // Kiểm tra name đã có trong User hay Admin chưa
+                            if (txtName.Text != admin.Name && (!_userBus.CheckByUsername(txtName.Text) || !_adminBus.CheckByUsername(txtName.Text)))
                             {
-                                MessageBox.Show("Username đã tồn tại, vui lòng thử lại!", "Thông Báo");
+                                MessageBox.Show("Name đã tồn tại, vui lòng thử lại!", "Thông Báo");
                             }// Kiểm tra email đã có trong User hay Admin chưa
-                            else if (txtEmail.Text != user.Email && (!_userBus.CheckByEmail(txtEmail.Text) || !_adminBus.CheckByEmail(txtEmail.Text)))
+                            else if (txtEmail.Text != admin.Email && (!_userBus.CheckByEmail(txtEmail.Text) || !_adminBus.CheckByEmail(txtEmail.Text)))
                             {
                                 MessageBox.Show("Email đã tồn tại, vui lòng thử lại!", "Thông Báo");
-                            } else
+                            }
+                            else
                             {
-                                List<User> users = _userBus.GetByUsername(se.Name);
-                                _userBus.ChangeInfoByName(txtUsername.Text, txtEmail.Text, txtPhone.Text, users.FirstOrDefault());
+                                List<Admin> admins = _adminBus.GetByName(se.Name);
+                                _adminBus.ChangeInfo(txtName.Text, txtEmail.Text, admins.FirstOrDefault());
                                 MessageBox.Show("thay đổi thành công!\nĐăng nhập lại để tiếp tục!", "Thông Báo");
                                 this.frm_Login.Show();
-                                this.frm_User.Close();
+                                this.frm_Admin.Close();
                             }
-                        } else
+                        }
+                        else
                         {
                             MessageBox.Show("Vui lòng thay đổi thông tin nếu muốn thay đổi!", "Thông Báo");
                         }
                     }
                 }
             }
-            
+
         }
     }
 }

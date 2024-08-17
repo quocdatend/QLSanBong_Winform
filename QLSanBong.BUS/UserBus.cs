@@ -95,9 +95,9 @@ namespace QLSanBong.BUS
             _context.SaveChanges();
         }
         // Thay đổi thông tin tài khoản
-        public void ChangeInfoByName(string name, string email, string phone)
+        public void ChangeInfoByName(string name, string email, string phone, User user1)
         {
-            User user = _context.Users.Where(x => x.Email.Equals(email)).ToList()[0];
+            User user = _context.Users.Where(x => x.Equals(user1)).ToList()[0];
             user.Username = name;
             user.Email = email;
             user.Phone = phone;

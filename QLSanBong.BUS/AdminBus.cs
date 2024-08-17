@@ -94,5 +94,15 @@ namespace QLSanBong.BUS
             _context.Entry(admin).State = EntityState.Modified;
             _context.SaveChanges();
         }
+
+        // change infomation account admin
+        public void ChangeInfo(string name, string email, Admin admin1)
+        {
+            Admin admin = _context.Admins.Where(_x => _x.Id == admin1.Id).FirstOrDefault(); 
+            admin.Name = name;
+            admin.Email = email;
+            _context.Entry(admin).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }
