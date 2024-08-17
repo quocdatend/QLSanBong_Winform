@@ -43,7 +43,7 @@ namespace QLSanBong.GUI.Users
             dgvOrderPitch.Columns.Add("Column5", "Trạng thái");
             dgvOrderPitch.Columns.Add("Column6", "Thannh toán");
 
-            foreach (var item in orderPitches)
+            foreach (OrderPitch item in orderPitches)
             {
                 Pitch pitch = _pitchBus.GetById(item.PitchId).FirstOrDefault();
                 TypePitch typePitch = _typePitchBus.GetById(pitch.TypePitchId).FirstOrDefault();

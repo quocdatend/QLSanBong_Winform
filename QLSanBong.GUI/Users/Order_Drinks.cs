@@ -37,7 +37,7 @@ namespace QLSanBong.GUI.Users
 
             List<OrderFoodDrink> orderFoodDrinks = _orderFoodDrinkBus.GetByUserId(_sessionBus.Session.Id);
             int i = 0;
-            foreach (var item in orderFoodDrinks)
+            foreach (OrderFoodDrink item in orderFoodDrinks)
             {
                 i++;
                 dgvShowTimeOrder.Rows.Add(i, item.Time);
@@ -57,11 +57,11 @@ namespace QLSanBong.GUI.Users
             List<OrderFoodDrinkDetail> orderFoodDrinkDetails = _orderFoodDrinkDetailBus.GetByOrderFoodDrinkId(orderFoodDrinks.FirstOrDefault().Id);
             List<FoodDrink> foodDrinks = _foodDrinkBus.GetAll();
             int i = 0;
-            foreach (var item in orderFoodDrinkDetails)
+            foreach (OrderFoodDrinkDetail item in orderFoodDrinkDetails)
             {
                 string name = "null";
                 i++;
-                foreach (var item1 in foodDrinks)
+                foreach (FoodDrink item1 in foodDrinks)
                 {
                     if(item.FoodDrinkId == item1.Id) name = item1.Name;
                 }

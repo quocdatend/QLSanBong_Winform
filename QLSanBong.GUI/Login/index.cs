@@ -79,7 +79,7 @@ namespace QLSanBong.GUI.Login
                         };
                         _sessionBus.Add(session);
                         MessageBox.Show("Đăng nhập thành công!", "Thông Báo");
-                        frm_Admin frmAdmin = new frm_Admin();
+                        frm_Admin frmAdmin = new frm_Admin(this, _sessionBus);
                         frmAdmin.Show();
                         this.Hide();
                     }
