@@ -41,7 +41,6 @@ namespace QLSanBong.GUI.Users
             {
                 this.Close();
                 frm_Login.Show();
-                
             }
         }
 
@@ -96,9 +95,11 @@ namespace QLSanBong.GUI.Users
             DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                this.Close();
                 frm_Login.Show();
                 
+            } else
+            {
+                e.Cancel = true;
             }
         }
     }

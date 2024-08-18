@@ -14,6 +14,7 @@ namespace QLSanBong.GUI.Users
 {
     public partial class frm_OrderDrinks : Form
     {
+        private readonly UserBus _userBus = new UserBus();
         private readonly FoodDrinkBus _foodDrinkBus = new FoodDrinkBus();
         private readonly OrderFoodDrinkDetailBus _orderFoodDrinkDetailBus = new OrderFoodDrinkDetailBus();
         private readonly OrderFoodDrinkBus _orderFoodDrinkBus = new OrderFoodDrinkBus();
@@ -35,9 +36,11 @@ namespace QLSanBong.GUI.Users
             dgvShowTimeOrder.Columns.Add("Column1", "Stt");
             dgvShowTimeOrder.Columns.Add("Column2", "Thời gian");
 
-            List<OrderFoodDrink> orderFoodDrinks = _orderFoodDrinkBus.GetByUserId(_sessionBus.Session.Id);
+            List<User> users = _userBus.GetByUsername(_sessionBus.Session.Name);
+            List<OrderFoodDrink> orderFoodDrinks = _orderFoodDrinkBus.GetByUserId(users.FirstOrDefault().Id);
+            Console.WriteLine(_sessionBus.Session.Id.ToString());
             int i = 0;
-            foreach (OrderFoodDrink item in orderFoodDrinks)
+            foreach (OrderFoodDrink item in orderFoodDrinks) 
             {
                 i++;
                 dgvShowTimeOrder.Rows.Add(i, item.Time);
@@ -52,7 +55,8 @@ namespace QLSanBong.GUI.Users
 
         private void dgvShowTimeOrder_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DateTime time = DateTime.ParseExact((string)dgvShowTimeOrder.Rows[e.RowIndex].Cells[columnName: "Column2"].Value, "dd/MM/yyyy HH:mm", null);
+            dgvShowOrderDetail.Rows.Clear();
+            DateTime time = DateTime.ParseExact(dgvShowTimeOrder.Rows[e.RowIndex].Cells[columnName: "Column2"].Value.ToString(), "dd/MM/yyyy h:mm:ss tt", null);
             List<OrderFoodDrink> orderFoodDrinks = _orderFoodDrinkBus.GetByTime(time);
             List<OrderFoodDrinkDetail> orderFoodDrinkDetails = _orderFoodDrinkDetailBus.GetByOrderFoodDrinkId(orderFoodDrinks.FirstOrDefault().Id);
             List<FoodDrink> foodDrinks = _foodDrinkBus.GetAll();

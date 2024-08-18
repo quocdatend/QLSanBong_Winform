@@ -97,5 +97,19 @@ namespace QLSanBong.GUI.Admins
         {
             OpenChildForm(new frm_AccountAdmin(_sessionBus, this, this.frm_Login));
         }
+
+        private void frm_Admin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                frm_Login.Show();
+
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

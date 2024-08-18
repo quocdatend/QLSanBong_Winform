@@ -1,5 +1,6 @@
 ﻿using QLSanBong.DAL.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,13 @@ namespace QLSanBong.BUS
             List<OrderPitch> orderPitches = _context.OrderPitches.Where(x=>x.TimeStart == start && x.TimeEnd == end).ToList();
             return orderPitches;
         }
-            
+        
+        // get by id
+        public List<OrderPitch> GetById(int id)
+        {
+            List<OrderPitch> orderPitches = _context.OrderPitches.Where(x => x.Id == id).ToList();
+            return orderPitches;
+        }
 
         // chage status check
         

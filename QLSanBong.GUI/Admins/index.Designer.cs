@@ -128,11 +128,11 @@
             menuStrip2.Dock = DockStyle.None;
             menuStrip2.ImageScalingSize = new Size(20, 20);
             menuStrip2.Items.AddRange(new ToolStripItem[] { thôngTinTàiKhoảnToolStripMenuItem });
-            menuStrip2.Location = new Point(855, 9);
+            menuStrip2.Location = new Point(1005, 9);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.RenderMode = ToolStripRenderMode.System;
             menuStrip2.RightToLeft = RightToLeft.Yes;
-            menuStrip2.Size = new Size(309, 28);
+            menuStrip2.Size = new Size(159, 28);
             menuStrip2.TabIndex = 1;
             menuStrip2.Text = "menuStrip2";
             // 
@@ -175,6 +175,7 @@
             MainMenuStrip = menuStrip1;
             Name = "frm_Admin";
             Text = "Quản lý";
+            FormClosing += frm_Admin_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             menuStrip2.ResumeLayout(false);

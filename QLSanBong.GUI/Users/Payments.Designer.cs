@@ -28,32 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            dgv_Payments = new DataGridView();
+            dgvShowPitch = new DataGridView();
+            dgvShowFoodDrink = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgv_Payments).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvShowPitch).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvShowFoodDrink).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // dgv_Payments
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(450, 212);
-            label1.Name = "label1";
-            label1.Size = new Size(152, 20);
-            label1.TabIndex = 0;
-            label1.Text = "this is page payments";
+            dgv_Payments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_Payments.Location = new Point(12, 12);
+            dgv_Payments.Name = "dgv_Payments";
+            dgv_Payments.RowHeadersWidth = 51;
+            dgv_Payments.Size = new Size(306, 426);
+            dgv_Payments.TabIndex = 0;
+            dgv_Payments.RowHeaderMouseClick += dgv_Payments_RowHeaderMouseClick;
+            // 
+            // dgvShowPitch
+            // 
+            dgvShowPitch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvShowPitch.Location = new Point(324, 12);
+            dgvShowPitch.Name = "dgvShowPitch";
+            dgvShowPitch.RowHeadersWidth = 51;
+            dgvShowPitch.Size = new Size(707, 168);
+            dgvShowPitch.TabIndex = 1;
+            // 
+            // dgvShowFoodDrink
+            // 
+            dgvShowFoodDrink.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvShowFoodDrink.Location = new Point(324, 186);
+            dgvShowFoodDrink.Name = "dgvShowFoodDrink";
+            dgvShowFoodDrink.RowHeadersWidth = 51;
+            dgvShowFoodDrink.Size = new Size(707, 252);
+            dgvShowFoodDrink.TabIndex = 2;
             // 
             // frm_Payments
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1043, 450);
-            Controls.Add(label1);
+            Controls.Add(dgvShowFoodDrink);
+            Controls.Add(dgvShowPitch);
+            Controls.Add(dgv_Payments);
             Name = "frm_Payments";
             Text = "Payments";
+            ((System.ComponentModel.ISupportInitialize)dgv_Payments).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvShowPitch).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvShowFoodDrink).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private DataGridView dgv_Payments;
+        private DataGridView dgvShowPitch;
+        private DataGridView dgvShowFoodDrink;
     }
 }
