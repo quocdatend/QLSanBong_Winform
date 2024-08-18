@@ -77,8 +77,8 @@ namespace QLSanBong.GUI.Users
             List<TypePitch> getSan7 = _typePitchBus.GetByName("Sân 7");
             List<Pitch> getByIdSan5 = _pitchBus.GetByPitchId(getSan5.FirstOrDefault().Id);
             List<Pitch> getByIdSan7 = _pitchBus.GetByPitchId(getSan7.FirstOrDefault().Id);
-            string countSan5 = getByIdSan5.Count() == 0 ? "Hết" : (getSan5.Count()).ToString();
-            string countSan7 = getByIdSan7.Count() == 0 ? "Hết" : (getSan7.Count()).ToString();
+            string countSan5 = getByIdSan5.Count() == 0 ? "Hết" : getByIdSan5.Count().ToString();
+            string countSan7 = getByIdSan7.Count() == 0 ? "Hết" : getByIdSan7.Count().ToString();
 
             if (comboBoxDate.SelectedItem == null) return;
 
@@ -102,8 +102,44 @@ namespace QLSanBong.GUI.Users
                     time2 = endOfDay;
                 }
                 //List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(startTime, time2);
-                
-                dgvPitch.Rows.Add(time1.ToString("HH:mm"), time2.ToString("HH:mm"), countSan5 , countSan7); /// bug hered
+                //
+                string countSan5demo = countSan5;
+                string countSan7demo = countSan7;
+                DateTime getCbtime1 = DateTime.ParseExact(comboBoxDate.Text, "dd/MM/yyyy", null);
+                DateTime startTime1 = getCbtime1.Date.Add(DateTime.ParseExact(time1.ToString("HH:mm"), "HH:mm", null).TimeOfDay);
+                DateTime endTime1 = getCbtime1.Date.Add(DateTime.ParseExact(time2.ToString("HH:mm"), "HH:mm", null).TimeOfDay);
+                List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(startTime1, endTime1);
+
+                if (!countSan5demo.Equals("Hết"))
+                {
+                    foreach (Pitch item in getByIdSan5)
+                    {
+                        foreach (OrderPitch item1 in orderPitches)
+                        {
+                            if (item.Id == item1.PitchId)
+                            {
+                                countSan5demo = (int.Parse(countSan5demo) -1).ToString();
+                            }
+                        }
+                    }
+                    if (countSan5demo.Equals("0")) countSan5demo = "Hết";
+                }
+                if (!countSan7demo.Equals("Hết"))
+                {
+                    foreach (Pitch item in getByIdSan7)
+                    {
+                        foreach (OrderPitch item1 in orderPitches)
+                        {
+                            if (item.Id == item1.PitchId)
+                            {
+                                countSan7demo = (int.Parse(countSan7demo) - 1).ToString();
+                            }
+                        }
+                    }
+                    if (countSan7demo.Equals("0")) countSan7demo = "Hết";
+                }
+                //
+                dgvPitch.Rows.Add(time1.ToString("HH:mm"), time2.ToString("HH:mm"), countSan5demo , countSan7demo); /// bug hered
 
                 startTime = startTime.AddHours(1);
             }
@@ -123,22 +159,46 @@ namespace QLSanBong.GUI.Users
                         typePitch = "Sân 5";
                     }
                     DateTime getCbtime = DateTime.ParseExact(comboBoxDate.Text, "dd/MM/yyyy", null);
-                    DateTime startTime = getCbtime.Date.Add(DateTime.ParseExact((string)dgvPitch.Rows[rowclick].Cells[columnName: "Column1"].Value, "HH:mm", null).TimeOfDay);
-                    DateTime endTime = getCbtime.Date.Add(DateTime.ParseExact((string)dgvPitch.Rows[rowclick].Cells[columnName: "Column2"].Value, "HH:mm", null).TimeOfDay);
+                    DateTime startTime = getCbtime.Date.Add(DateTime.ParseExact(dgvPitch.Rows[rowclick].Cells[columnName: "Column1"].Value.ToString(), "HH:mm", null).TimeOfDay);
+                    DateTime endTime = getCbtime.Date.Add(DateTime.ParseExact(dgvPitch.Rows[rowclick].Cells[columnName: "Column2"].Value.ToString(), "HH:mm", null).TimeOfDay);
                     List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(startTime, endTime);
                     List<TypePitch> getSan = _typePitchBus.GetByName(typePitch);
                     List<Pitch> getPitch = _pitchBus.GetByPitchId(getSan.FirstOrDefault().Id);
-                    if (orderPitches.Count() == getPitch.Count())
+
+                    bool isFree = true;
+                    Pitch freePitch = null;
+                    foreach (Pitch item in getPitch)
+                    {
+                        foreach (OrderPitch item1 in orderPitches)
+                        {
+                            if (item.Id == item1.PitchId)
+                            {
+                                isFree = false;
+                                break;
+                            }
+                        }
+                        if (isFree)
+                        {
+                            //MessageBox.Show(true.ToString() + "1");
+                            freePitch = item;
+                            break;
+                        }
+                        isFree = true;
+                    }
+
+                    if (freePitch == null)
                     {
                         MessageBox.Show("Đã Hết Sân " + typePitch + "!", "Thông báo");
                     } else
                     {
+                        
+
                         List<PricePerHour> pricePerHours = _pricePerHourBus.GetAll();
                         foreach (PricePerHour item in pricePerHours)
                         {
                             if ((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay))
                             {
-                                MessageBox.Show(((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay)).ToString());
+                                //MessageBox.Show(((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay)).ToString() + "2");
                                 pricePitch = item;
                             }
                         }
@@ -150,9 +210,9 @@ namespace QLSanBong.GUI.Users
                             IsPay = false,
                             TimeStart = startTime,
                             TimeEnd = endTime,
-                            Price = getSan.FirstOrDefault().Price,
+                            Price = getSan.First().Price,
                             PricePerHourId = pricePitch.Id,
-                            PitchId = getPitch[orderPitches.Count()].Id, /// bug here
+                            PitchId = freePitch.Id, // [old code] getPitch[orderPitches.Count()].Id
                         };
                         _orderPitchBus.Add(newOrderPitch);
                     }
@@ -160,7 +220,6 @@ namespace QLSanBong.GUI.Users
                 {
                     MessageBox.Show("Vui lòng chọn sân!", "Thông báo");
                 }
-                
             }
         }
 
