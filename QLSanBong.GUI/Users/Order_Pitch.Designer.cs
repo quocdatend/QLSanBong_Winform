@@ -41,6 +41,7 @@
             dgvOrderPitch.RowHeadersWidth = 51;
             dgvOrderPitch.Size = new Size(743, 426);
             dgvOrderPitch.TabIndex = 0;
+            dgvOrderPitch.RowHeaderMouseClick += dgvOrderPitch_RowHeaderMouseClick;
             // 
             // btnDelete
             // 

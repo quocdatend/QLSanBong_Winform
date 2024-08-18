@@ -34,7 +34,7 @@ namespace QLSanBong.GUI.Users
 
         private void ShowDataGridView()
         {
-            List<OrderPitch> orderPitches = _orderPitchBus.GetAll(); 
+            List<OrderPitch> orderPitches = _orderPitchBus.GetAll();
 
             dgvOrderPitch.Columns.Add("Column1", "Thời gian bắt đầu");
             dgvOrderPitch.Columns.Add("Column2", "Thời gian kết thúc");
@@ -49,12 +49,17 @@ namespace QLSanBong.GUI.Users
                 TypePitch typePitch = _typePitchBus.GetById(pitch.TypePitchId).FirstOrDefault();
                 PricePerHour price = _pricePerHourBus.GetById(item.PricePerHourId).FirstOrDefault();
                 string isCheck = "Chưa Xác Nhận";
-                if(item.IsCheck!=null)
+                if (item.IsCheck != null)
                 {
                     isCheck = item.IsCheck is true ? "Xong" : "Hủy";
                 }
                 dgvOrderPitch.Rows.Add(item.TimeStart, item.TimeEnd, typePitch.Name, item.Price + price.Price, isCheck, item.IsPay ? "Rồi" : "Chưa");
             }
+        }
+
+        private void dgvOrderPitch_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
         }
     }
 }

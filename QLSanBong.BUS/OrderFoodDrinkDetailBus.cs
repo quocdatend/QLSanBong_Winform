@@ -23,5 +23,12 @@ namespace QLSanBong.BUS
             List<OrderFoodDrinkDetail> orderFoodDrinkDetails = _context.OrderFoodDrinkDetails.Where(x=>x.OrderFoodDrinkId == orderFoodDrinkId).ToList();
             return orderFoodDrinkDetails;
         }
+
+        // add
+        public void Add(OrderFoodDrinkDetail orderFoodDrinkDetail)
+        {
+            _context.OrderFoodDrinkDetails.Add(orderFoodDrinkDetail);
+            _context.SaveChanges();
+        }
     }
 }

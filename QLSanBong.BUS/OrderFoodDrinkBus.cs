@@ -28,8 +28,16 @@ namespace QLSanBong.BUS
         // Get by Time
         public List<OrderFoodDrink> GetByTime(DateTime time)
         {
-            List<OrderFoodDrink> orderFoodDrinks = _context.OrderFoodDrinks.Where(x => DateTime.ParseExact(x.Time.ToString(), "dd/MM/yyyy HH:mm", null) ==  time).ToList();
-            return orderFoodDrinks;
+            List<OrderFoodDrink> orderFoodDrinks = _context.OrderFoodDrinks.ToList();
+            List<OrderFoodDrink> find = orderFoodDrinks.Where(x => DateTime.ParseExact(x.Time.ToString(), "dd/MM/yyyy h:mm:ss tt", null) ==  time).ToList();
+            return find;
+        }
+
+        // add
+        public void Add(OrderFoodDrink orderFoodDrink)
+        {
+            _context.OrderFoodDrinks.Add(orderFoodDrink);
+            _context.SaveChanges();
         }
     }
 }

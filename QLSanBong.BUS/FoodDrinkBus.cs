@@ -32,5 +32,12 @@ namespace QLSanBong.BUS
             _context.FoodDrinks.Add(drink);
             _context.SaveChanges();
         }
+
+        // get by name
+        public List<FoodDrink> GetByName(string name)
+        {
+            List<FoodDrink> foodDrinks = _context.FoodDrinks.Where(x=>x.Name.Equals(name)).ToList();
+            return foodDrinks;
+        }
     }
 }
