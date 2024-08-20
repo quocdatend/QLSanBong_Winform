@@ -51,6 +51,7 @@
             btnDelete.TabIndex = 1;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // frm_OrderPitch
             // 

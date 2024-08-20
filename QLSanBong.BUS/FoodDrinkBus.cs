@@ -39,5 +39,7 @@ namespace QLSanBong.BUS
             List<FoodDrink> foodDrinks = _context.FoodDrinks.Where(x=>x.Name.Equals(name)).ToList();
             return foodDrinks;
         }
+
+        // Update count when order
     }
 }

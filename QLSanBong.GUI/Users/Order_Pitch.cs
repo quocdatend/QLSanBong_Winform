@@ -20,6 +20,7 @@ namespace QLSanBong.GUI.Users
         private readonly TypePitchBus _typePitchBus = new TypePitchBus();
         private readonly OrderPitchBus _orderPitchBus = new OrderPitchBus();
         private readonly SessionBus _sessionBus;
+        private int rowIndex = -1;
         public frm_OrderPitch()
         {
             InitializeComponent();
@@ -59,7 +60,24 @@ namespace QLSanBong.GUI.Users
 
         private void dgvOrderPitch_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            rowIndex = e.RowIndex;
+        }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            
+            if(rowIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn", "Thông Báo");
+            } else
+            {
+                DialogResult result = MessageBox.Show("Bạn chắc chắn muốn xóa", "Thông báo", MessageBoxButtons.YesNo);
+                if(result == DialogResult.Yes)
+                {
+                    List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(DateTime.ParseExact(dgvOrderPitch.Rows[rowIndex].Cells[columnName: "Column1"].Value.ToString(), "dd/MM/yyyy h:mm:ss tt", null), DateTime.ParseExact(dgvOrderPitch.Rows[rowIndex].Cells[columnName: "Column2"].Value.ToString(), "dd/MM/yyyy h:mm:ss tt", null));
+                    _orderPitchBus.Delete(orderPitches.FirstOrDefault());
+                }
+            }
         }
     }
 }
