@@ -54,8 +54,6 @@ namespace QLSanBong.BUS
             return orderPitches;
         }
 
-
-
         // chage status check
         
     }

@@ -76,7 +76,9 @@ namespace QLSanBong.GUI.Users
                 {
                     List<OrderPitch> orderPitches = _orderPitchBus.GetByDateTime(DateTime.ParseExact(dgvOrderPitch.Rows[rowIndex].Cells[columnName: "Column1"].Value.ToString(), "dd/MM/yyyy h:mm:ss tt", null), DateTime.ParseExact(dgvOrderPitch.Rows[rowIndex].Cells[columnName: "Column2"].Value.ToString(), "dd/MM/yyyy h:mm:ss tt", null));
                     _orderPitchBus.Delete(orderPitches.FirstOrDefault());
+                    MessageBox.Show("Xóa thành công", "Thông báo");
                 }
+                rowIndex = -1;
             }
         }
     }
