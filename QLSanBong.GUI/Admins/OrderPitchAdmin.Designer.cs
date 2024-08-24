@@ -42,6 +42,7 @@
             cbTime.Name = "cbTime";
             cbTime.Size = new Size(1110, 28);
             cbTime.TabIndex = 0;
+            cbTime.SelectedIndexChanged += cbTime_SelectedIndexChanged;
             // 
             // dgvShowOrderPitch
             // 
@@ -51,6 +52,7 @@
             dgvShowOrderPitch.RowHeadersWidth = 51;
             dgvShowOrderPitch.Size = new Size(841, 380);
             dgvShowOrderPitch.TabIndex = 1;
+            dgvShowOrderPitch.RowHeaderMouseClick += dgvShowOrderPitch_RowHeaderMouseClick;
             // 
             // btnCancel
             // 
@@ -60,6 +62,7 @@
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Hủy";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnSubmit
             // 
@@ -69,6 +72,7 @@
             btnSubmit.TabIndex = 3;
             btnSubmit.Text = "Đồng Ý";
             btnSubmit.UseVisualStyleBackColor = true;
+            btnSubmit.Click += btnSubmit_Click;
             // 
             // frm_OrderPitchAdmin
             // 

@@ -196,6 +196,8 @@ namespace QLSanBong.GUI.Users
                         List<PricePerHour> pricePerHours = _pricePerHourBus.GetAll();
                         foreach (PricePerHour item in pricePerHours)
                         {
+                            //MessageBox.Show(item.TimeStart.ToTimeSpan().ToString() + " " + startTime.TimeOfDay.ToString() + " : " + (item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay).ToString() + "\n" +
+                            //    item.TimeEnd.ToTimeSpan().ToString() + " " + endTime.TimeOfDay.ToString() + " : " + (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay).ToString());
                             if ((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay))
                             {
                                 //MessageBox.Show(((item.TimeStart.ToTimeSpan() <= startTime.TimeOfDay) && (item.TimeEnd.ToTimeSpan() >= endTime.TimeOfDay)).ToString() + "2");
@@ -206,7 +208,8 @@ namespace QLSanBong.GUI.Users
                         OrderPitch newOrderPitch = new OrderPitch()
                         {
                             UserId = user.Id,
-                            IsCheck = null,
+                            IsCancel = false,
+                            IsCheck = false,
                             IsPay = false,
                             TimeStart = startTime,
                             TimeEnd = endTime,
@@ -215,6 +218,7 @@ namespace QLSanBong.GUI.Users
                             PitchId = freePitch.Id, // [old code] getPitch[orderPitches.Count()].Id
                         };
                         _orderPitchBus.Add(newOrderPitch);
+                        MessageBox.Show("Đặt Sân Thành Công!", "Thông báo");
                     }
                 } else
                 {

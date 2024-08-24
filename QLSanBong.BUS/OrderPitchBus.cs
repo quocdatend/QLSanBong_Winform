@@ -1,4 +1,5 @@
-﻿using QLSanBong.DAL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using QLSanBong.DAL.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,13 +41,21 @@ namespace QLSanBong.BUS
             return orderPitches;
         }
 
-        // get by day
+        // get by daytime start, end
         public List<OrderPitch> GetByDateTime(DateTime start, DateTime end)
         {
             List<OrderPitch> orderPitches = _context.OrderPitches.Where(x=>x.TimeStart == start && x.TimeEnd == end).ToList();
             return orderPitches;
         }
-        
+
+        // get by day
+        public List<OrderPitch> GetByDay(DateTime day)
+        {
+            List<OrderPitch> orderPitches = _context.OrderPitches.ToList();
+            List<OrderPitch> getOrderPitchs = orderPitches.Where(x=>DateTime.ParseExact(x.TimeStart.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null) == day).ToList(); 
+            return getOrderPitchs;
+        }
+
         // get by id
         public List<OrderPitch> GetById(int id)
         {
@@ -55,6 +64,17 @@ namespace QLSanBong.BUS
         }
 
         // chage status check
-        
+        public void ChangeCheck(OrderPitch orderPitch)
+        {
+            _context.Entry(orderPitch).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        // chage status Cancel
+        public void ChangeCancel(OrderPitch orderPitch)
+        {
+            _context.Entry(orderPitch).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
     }
 }

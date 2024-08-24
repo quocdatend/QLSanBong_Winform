@@ -54,7 +54,7 @@ namespace QLSanBong.GUI.Admins
 
         private void OrderPitchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenChildForm(new frm_OrderPitchAdmin(_sessionBus));
         }
 
         private void TypePitchToolStripMenuItem_Click(object sender, EventArgs e)
@@ -87,9 +87,8 @@ namespace QLSanBong.GUI.Admins
             DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                this.Close();
                 frm_Login.Show();
-
+                this.Close();
             }
         }
 
@@ -104,7 +103,6 @@ namespace QLSanBong.GUI.Admins
             if (dialogResult == DialogResult.Yes)
             {
                 frm_Login.Show();
-
             }
             else
             {

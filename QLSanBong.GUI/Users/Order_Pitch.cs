@@ -42,20 +42,24 @@ namespace QLSanBong.GUI.Users
             dgvOrderPitch.Columns.Add("Column3", "Loai Sân");
             dgvOrderPitch.Columns.Add("Column4", "Giá tiền");
             dgvOrderPitch.Columns.Add("Column5", "Trạng thái");
-            dgvOrderPitch.Columns.Add("Column6", "Thannh toán");
+            dgvOrderPitch.Columns.Add("Column6", "Thanh toán");
 
             foreach (OrderPitch item in orderPitches)
             {
                 Pitch pitch = _pitchBus.GetById(item.PitchId).FirstOrDefault();
                 TypePitch typePitch = _typePitchBus.GetById(pitch.TypePitchId).FirstOrDefault();
                 PricePerHour price = _pricePerHourBus.GetById(item.PricePerHourId).FirstOrDefault();
-                string isCheck = "Chưa Xác Nhận";
-                if (item.IsCheck != null)
+                string isCheck = "Đã Xác Nhận";
+                if (item.IsCheck != null && item.IsCheck is false)
                 {
-                    isCheck = item.IsCheck is true ? "Xong" : "Hủy";
+                    isCheck = "Chưa xác nhận";
                 }
-                dgvOrderPitch.Rows.Add(item.TimeStart, item.TimeEnd, typePitch.Name, item.Price + price.Price, isCheck, item.IsPay ? "Rồi" : "Chưa");
-            }
+                if(item.IsCancel != null && item.IsCancel is true)
+                {
+                    isCheck = "Đã bị hủy";
+                }
+                dgvOrderPitch.Rows.Add(item.TimeStart, item.TimeEnd, typePitch.Name, item.Price + price.Price, isCheck, item.IsPay ? "Đã Thanh Toán" : "Chưa Thanh Toán");
+            } 
         }
 
         private void dgvOrderPitch_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

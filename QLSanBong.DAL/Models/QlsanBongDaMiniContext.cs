@@ -145,6 +145,7 @@ public partial class QlsanBongDaMiniContext : DbContext
             entity.ToTable("ORDER_PITCH");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IsCancel).HasColumnName("IS_CANCEL");
             entity.Property(e => e.IsCheck)
                 .HasDefaultValue(false)
                 .HasColumnName("IS_CHECK");

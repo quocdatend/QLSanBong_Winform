@@ -23,6 +23,8 @@ public partial class OrderPitch
 
     public bool IsPay { get; set; }
 
+    public bool? IsCancel { get; set; }
+
     public virtual ICollection<PaymentHistory> PaymentHistories { get; set; } = new List<PaymentHistory>();
 
     public virtual Pitch Pitch { get; set; } = null!;
