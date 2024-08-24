@@ -59,7 +59,7 @@ namespace QLSanBong.GUI.Admins
 
         private void TypePitchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenChildForm(new frm_TypePitch(_sessionBus));
         }
 
         private void PricePerHourToolStripMenuItem1_Click(object sender, EventArgs e)

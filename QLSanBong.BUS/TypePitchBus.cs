@@ -1,4 +1,5 @@
-﻿using QLSanBong.DAL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using QLSanBong.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,20 @@ namespace QLSanBong.BUS
         {
             List<TypePitch> list = _context.TypePitches.Where(x => x.Id == id).ToList();
             return list;
+        }
+
+        // chage info
+        public void ChangeInfo(TypePitch typePitch)
+        {
+            _context.Entry(typePitch).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        // Delete
+        public void Delete(TypePitch typePitch)
+        {
+            _context.TypePitches.Remove(typePitch);
+            _context.SaveChanges();
         }
     }
 }
