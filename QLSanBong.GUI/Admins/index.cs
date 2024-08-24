@@ -64,7 +64,7 @@ namespace QLSanBong.GUI.Admins
 
         private void PricePerHourToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            OpenChildForm(new frm_PricePerHour(_sessionBus));
         }
 
         private void OrderFoodDrinkToolStripMenuItem_Click(object sender, EventArgs e)
