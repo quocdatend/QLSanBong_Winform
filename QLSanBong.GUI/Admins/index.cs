@@ -82,6 +82,11 @@ namespace QLSanBong.GUI.Admins
 
         }
 
+        private void PitchToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frm_PitchAdmin(_sessionBus));
+        }
+
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn Có Muốn Thoát Không!", "Thông Báo", MessageBoxButtons.YesNo);

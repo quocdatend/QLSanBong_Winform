@@ -43,6 +43,7 @@
             AccountToolStripMenuItem = new ToolStripMenuItem();
             ExitToolStripMenuItem = new ToolStripMenuItem();
             panel_show = new Panel();
+            PitchToolStripMenuItem2 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             menuStrip2.SuspendLayout();
             SuspendLayout();
@@ -55,7 +56,7 @@
             menuStrip1.Location = new Point(9, 9);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.RenderMode = ToolStripRenderMode.System;
-            menuStrip1.Size = new Size(484, 28);
+            menuStrip1.Size = new Size(634, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -68,7 +69,7 @@
             // 
             // giáTheoGiờToolStripMenuItem
             // 
-            giáTheoGiờToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OrderPitchToolStripMenuItem, TypePitchToolStripMenuItem, PricePerHourToolStripMenuItem1 });
+            giáTheoGiờToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OrderPitchToolStripMenuItem, PitchToolStripMenuItem2, TypePitchToolStripMenuItem, PricePerHourToolStripMenuItem1 });
             giáTheoGiờToolStripMenuItem.Name = "giáTheoGiờToolStripMenuItem";
             giáTheoGiờToolStripMenuItem.Size = new Size(86, 24);
             giáTheoGiờToolStripMenuItem.Text = "Sân Bóng";
@@ -76,21 +77,21 @@
             // OrderPitchToolStripMenuItem
             // 
             OrderPitchToolStripMenuItem.Name = "OrderPitchToolStripMenuItem";
-            OrderPitchToolStripMenuItem.Size = new Size(174, 26);
+            OrderPitchToolStripMenuItem.Size = new Size(224, 26);
             OrderPitchToolStripMenuItem.Text = "Đặt Sân";
             OrderPitchToolStripMenuItem.Click += OrderPitchToolStripMenuItem_Click;
             // 
             // TypePitchToolStripMenuItem
             // 
             TypePitchToolStripMenuItem.Name = "TypePitchToolStripMenuItem";
-            TypePitchToolStripMenuItem.Size = new Size(174, 26);
+            TypePitchToolStripMenuItem.Size = new Size(224, 26);
             TypePitchToolStripMenuItem.Text = "Loại Sân";
             TypePitchToolStripMenuItem.Click += TypePitchToolStripMenuItem_Click;
             // 
             // PricePerHourToolStripMenuItem1
             // 
             PricePerHourToolStripMenuItem1.Name = "PricePerHourToolStripMenuItem1";
-            PricePerHourToolStripMenuItem1.Size = new Size(174, 26);
+            PricePerHourToolStripMenuItem1.Size = new Size(224, 26);
             PricePerHourToolStripMenuItem1.Text = "Giá theo giờ";
             PricePerHourToolStripMenuItem1.Click += PricePerHourToolStripMenuItem1_Click;
             // 
@@ -146,14 +147,14 @@
             // AccountToolStripMenuItem
             // 
             AccountToolStripMenuItem.Name = "AccountToolStripMenuItem";
-            AccountToolStripMenuItem.Size = new Size(224, 26);
+            AccountToolStripMenuItem.Size = new Size(154, 26);
             AccountToolStripMenuItem.Text = "Tài khoản";
             AccountToolStripMenuItem.Click += AccountToolStripMenuItem_Click;
             // 
             // ExitToolStripMenuItem
             // 
             ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            ExitToolStripMenuItem.Size = new Size(224, 26);
+            ExitToolStripMenuItem.Size = new Size(154, 26);
             ExitToolStripMenuItem.Text = "Thoát";
             ExitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
@@ -163,6 +164,13 @@
             panel_show.Name = "panel_show";
             panel_show.Size = new Size(1152, 485);
             panel_show.TabIndex = 2;
+            // 
+            // PitchToolStripMenuItem2
+            // 
+            PitchToolStripMenuItem2.Name = "PitchToolStripMenuItem2";
+            PitchToolStripMenuItem2.Size = new Size(224, 26);
+            PitchToolStripMenuItem2.Text = "Thông tin Sân bóng";
+            PitchToolStripMenuItem2.Click += PitchToolStripMenuItem2_Click;
             // 
             // frm_Admin
             // 
@@ -201,5 +209,6 @@
         private ToolStripMenuItem AccountToolStripMenuItem;
         private ToolStripMenuItem ExitToolStripMenuItem;
         private Panel panel_show;
+        private ToolStripMenuItem PitchToolStripMenuItem2;
     }
 }

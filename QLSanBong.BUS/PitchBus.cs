@@ -1,4 +1,5 @@
-﻿using QLSanBong.DAL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using QLSanBong.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace QLSanBong.BUS
             _context.Pitches.Add(pitch);
             _context.SaveChanges();
         }
-        // get by name
+        // get by TypePitch id
         public List<Pitch> GetByPitchId(int typePitch)
         {
             List<Pitch> list = _context.Pitches.Where(x=>x.TypePitchId == typePitch).ToList();
@@ -34,6 +35,34 @@ namespace QLSanBong.BUS
         {
             List<Pitch> list = _context.Pitches.Where(x=>x.Id == id).ToList();
             return list;
+        }
+
+        // get by name
+        public List<Pitch> GetByName(string name)
+        {
+            List<Pitch> pitches = _context.Pitches.Where(x=>x.Name.Equals(name)).ToList();
+            return pitches;
+        }
+
+        // add
+        public void Add(Pitch pitch)
+        {
+            _context.Pitches.Add(pitch);
+            _context.SaveChanges();
+        }
+
+        // Delete
+        public void Delete(Pitch pitch)
+        {
+            _context.Pitches.Remove(pitch);
+            _context.SaveChanges();
+        }
+
+        // Edit
+        public void Edit(Pitch pitch)
+        {
+            _context.Entry(pitch).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
