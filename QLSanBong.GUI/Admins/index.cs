@@ -93,7 +93,7 @@ namespace QLSanBong.GUI.Admins
             if (dialogResult == DialogResult.Yes)
             {
                 frm_Login.Show();
-                this.Close();
+                this.Hide();
             }
         }
 
