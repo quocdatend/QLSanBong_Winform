@@ -182,6 +182,7 @@ public partial class QlsanBongDaMiniContext : DbContext
             entity.ToTable("PAYMENT_HISTORY");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IsCheck).HasColumnName("IS_CHECK");
             entity.Property(e => e.OrderFoodDrinkId).HasColumnName("ORDER_FOOD_DRINK_ID");
             entity.Property(e => e.OrderPitchId).HasColumnName("ORDER_PITCH_ID");
             entity.Property(e => e.Price).HasColumnName("PRICE");

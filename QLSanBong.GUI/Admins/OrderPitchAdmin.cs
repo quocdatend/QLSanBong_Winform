@@ -16,6 +16,9 @@ namespace QLSanBong.GUI.Admins
 {
     public partial class frm_OrderPitchAdmin : Form
     {
+        private readonly OrderFoodDrinkDetailBus _orderFoodDrinkDetailBus = new OrderFoodDrinkDetailBus();
+        private readonly OrderFoodDrinkBus _orderFoodDrinkBus = new OrderFoodDrinkBus();
+        private readonly PaymentHistoryBus _paymentHistoryBus = new PaymentHistoryBus();
         private readonly PricePerHourBus _pricePerHourBus = new PricePerHourBus();
         private readonly OrderPitchBus _orderPitchBus = new OrderPitchBus();
         private readonly TypePitchBus _typePitchBus = new TypePitchBus();
@@ -121,6 +124,31 @@ namespace QLSanBong.GUI.Admins
                     OrderPitch orderPitch = _orderPitchBus.GetByDateTime(timeStart, timeEnd).FirstOrDefault();
                     orderPitch.IsCheck = true;
                     _orderPitchBus.ChangeCheck(orderPitch);
+                    DateTime currentTime = DateTime.Now;
+                    PricePerHour pricePerHour = _pricePerHourBus.GetById(orderPitch.PricePerHourId).FirstOrDefault();
+                    User user = _userBus.GetById(orderPitch.UserId).FirstOrDefault();
+                    List<OrderFoodDrink> orderFoodDrinks = _orderFoodDrinkBus.GetByUserId(user.Id);
+                    OrderFoodDrink orderFoodDrink = orderFoodDrinks.Where(x => DateTime.ParseExact(x.Time.ToString("hh/MM/yyyy"), "hh/MM/yyyy", null) == DateTime.ParseExact(DateTime.Now.ToString("hh/MM/yyyy"), "hh/MM/yyyy", null)).LastOrDefault();
+                    List<OrderFoodDrinkDetail> orderFoodDrinkDetail = null;
+                    float totalPrice = (float)orderPitch.Price + (float)pricePerHour.Price;
+                    if (orderFoodDrink != null)
+                    {
+                        orderFoodDrinkDetail = _orderFoodDrinkDetailBus.GetByOrderFoodDrinkId(orderFoodDrink.Id);
+                        foreach (OrderFoodDrinkDetail item in orderFoodDrinkDetail)
+                        {
+                            totalPrice += (float)item.Price * (int)item.Count;
+                        }
+                    }
+                    PaymentHistory paymentHistory = new PaymentHistory()
+                    {
+                        UserId = user.Id,
+                        Time = currentTime,
+                        OrderPitchId = orderPitch.Id,
+                        OrderFoodDrinkId = null,
+                        IsCheck = false,
+                        Price = totalPrice,
+                    };
+                    _paymentHistoryBus.Add(paymentHistory);
                     MessageBox.Show("Thay đổi thành công", "Thông Báo");
                     LoaDataToDGV();
                 }

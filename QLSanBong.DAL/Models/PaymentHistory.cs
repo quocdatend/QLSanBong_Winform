@@ -17,6 +17,8 @@ public partial class PaymentHistory
 
     public int? OrderFoodDrinkId { get; set; }
 
+    public bool? IsCheck { get; set; }
+
     public virtual OrderFoodDrink? OrderFoodDrink { get; set; }
 
     public virtual OrderPitch? OrderPitch { get; set; }

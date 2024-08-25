@@ -79,7 +79,7 @@ namespace QLSanBong.GUI.Admins
 
         private void PaymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenChildForm(new frm_PaymentAdmin(_sessionBus));
         }
 
         private void PitchToolStripMenuItem2_Click(object sender, EventArgs e)
