@@ -49,6 +49,13 @@ namespace QLSanBong.BUS
             _context.SaveChanges();
         }
 
+        // Get by Id
+        public List<FoodDrink> GetById(int id)
+        {
+            List<FoodDrink> foodDrinks = _context.FoodDrinks.Where(x=>x.Id == id).ToList();
+            return foodDrinks;
+        }
+
         // Update count when order
     }
 }

@@ -33,6 +33,14 @@ namespace QLSanBong.BUS
             return find;
         }
 
+        // Get by Day
+        public List<OrderFoodDrink> GetByDay(DateTime day)
+        {
+            List<OrderFoodDrink> orderFoodDrinks = _context.OrderFoodDrinks.ToList();
+            List<OrderFoodDrink> find = orderFoodDrinks.Where(x => DateTime.ParseExact(x.Time.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null) == day).ToList();
+            return find;
+        }
+
         // add
         public void Add(OrderFoodDrink orderFoodDrink)
         {

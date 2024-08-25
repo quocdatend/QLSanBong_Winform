@@ -69,7 +69,7 @@ namespace QLSanBong.GUI.Admins
 
         private void OrderFoodDrinkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenChildForm(new frm_OrderFoodDrinkAdmin(_sessionBus));
         }
 
         private void FoodDrinksToolStripMenuItem_Click(object sender, EventArgs e)
