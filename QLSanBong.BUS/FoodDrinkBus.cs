@@ -1,4 +1,6 @@
-﻿using QLSanBong.DAL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using QLSanBong.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +40,13 @@ namespace QLSanBong.BUS
         {
             List<FoodDrink> foodDrinks = _context.FoodDrinks.Where(x=>x.Name.Equals(name)).ToList();
             return foodDrinks;
+        }
+
+        // Update from admin
+        public void Edit(FoodDrink drink)
+        {
+            _context.Entry(drink).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         // Update count when order
